@@ -1,3 +1,5 @@
+docker network create --driver=bridge  --subnet=192.168.1.0/24 local_bridge
+
 docker-compose up -d
 
 docker-compose down

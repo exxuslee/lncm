@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   bitcoin:
     image: lncm/bitcoind:v27.0
@@ -14,7 +13,7 @@ services:
       - "28332:28332" # ZMQ (rawblock)
       - "28333:28333" # ZMQ (rawtx)
     networks:
-      - net
+      - local_bridge
 
   lnd:
     image: lightninglabs/lnd:v0.18.4-beta
@@ -34,7 +33,7 @@ services:
     depends_on:
       - bitcoin
     networks:
-      - net
+      - local_bridge
 
   neutrino-switcher:
     image: "lncm/neutrino-switcher:1.0.4"
@@ -53,8 +52,8 @@ services:
       LND_CONTAINER_NAME: lnd
       SLEEPTIME: 43200
     networks:
-      - net
+      - local_bridge
 
 networks:
-  net:
-    driver: bridge
+  local_bridge:
+    external: true
